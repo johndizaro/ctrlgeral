@@ -198,6 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   setState(
                     () {
+                      _log.info("Recuperar senha",);
                       dialogoInformativo(context,
                           "Desculpe o transtorno, esta rotina encontra-se em desenvolvimento.");
                     },

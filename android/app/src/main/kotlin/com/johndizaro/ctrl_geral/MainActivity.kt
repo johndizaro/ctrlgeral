@@ -1,4 +1,4 @@
-package com.johndizaro.ctrl_geral
+package com.johndizaro.ctrlgeral
 
 import io.flutter.embedding.android.FlutterActivity
 
