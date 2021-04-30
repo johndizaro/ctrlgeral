@@ -1,11 +1,13 @@
+
 import 'dart:ui';
 
 import 'package:ctrl_geral/app_theme/app_themes.dart';
+import 'package:ctrl_geral/logging/logger_style.dart';
 import 'package:ctrl_geral/login/login_bloc.dart';
 import 'package:ctrl_geral/widgets/alerts/dialog_informativo.dart';
 import 'package:ctrl_geral/widgets/progress/circular_progress.dart';
 import 'package:flutter/material.dart';
-import 'package:logging/logging.dart';
+import 'package:logger/logger.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -23,16 +25,29 @@ class _LoginScreenState extends State<LoginScreen> {
   int indiceAtual = 0;
   Widget cardMostrar;
 
-  static final _log = Logger("_LoginScreenState");
-
-
-
   final _loginBloc = LoginBloc();
+
+
+  final log = getLoggerStyle("_LoginScreenState");
+
+
+  Logger logger = Logger(printer: LoggerStyle('LoginScreen'),
+    // printer: PrettyPrinter(
+    //     methodCount: 2,
+    //     errorMethodCount: 8,
+    //     lineLength: 50,
+    //     colors: true,
+    //     printEmojis: true,
+    //     printTime: false),
+  );
+
+
 
   @override
   void initState() {
+
     super.initState();
-    _log.fine("comecei a  rotina de initState",);
+    // _log.fine("comecei a  rotina de initState",);
     cardMostrar = _signinCard();
 
     _loginBloc.outState.listen(
@@ -198,9 +213,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   setState(
                     () {
-                      _log.info("Recuperar senha",);
-                      dialogoInformativo(context,
-                          "Desculpe o transtorno, esta rotina encontra-se em desenvolvimento.");
+                      // _log.info("Recuperar senha",);
+                      logger.i("mensagem de log1");
+                      logger.d("mensagem de log2");
+                      logger.e("mensagem de log3");
+                      logger.v("mensagem de log4");
+                      logger.e("mensagem de log5");
+                      logger.w("mensagem de log6");
+                      logger.wtf("mensagem de log7");
+                      // dialogoInformativo(context,
+                      //     "Desculpe o transtorno, esta rotina encontra-se em desenvolvimento.");
                     },
                   );
                 },
