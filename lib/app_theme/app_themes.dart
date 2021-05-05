@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 //Theme.of(context).copyWith(accentColor: Colors.yellow),
 
 class AppThemes {
-  static Color primarySwatch = Colors.teal;
-  static Color acentColor = Colors.tealAccent;
+  static Color primarySwatch = Colors.blue;
+  static Color acentColor = Colors.blueAccent;
 
-  static Color primaryColor = Color(0xffdbd0);
-  static Color primaryLightColor = Color(0xffffff);
-  static Color primaryDarkColor = Color(0xcba99f);
+  static Color primaryColor = Colors.cyan[900];
+  static Color primaryLightColor = Colors.cyan[200];
+  static Color primaryDarkColor = Colors.cyan[600];
 
-  static Color secondaryColor = Color(0xfeeae6);
-  static Color secondaryLightColor = Color(0xffffff);
-  static Color secondaryDarkColor = Color(0xcbb8b4);
+  static Color secondaryColor = Colors.green[900];
+  static Color secondaryLightColor = Colors.green[200];
+  static Color secondaryDarkColor = Colors.green[700];
 
 //  static Color primaryTextColor = Colors.white;
 //  static Color secundaryTextColor = Colors.black;
@@ -21,7 +21,7 @@ class AppThemes {
   static Brightness brightness = Brightness.light;
   static Color errorColor = Colors.redAccent;
   static Color dissabledColor = Colors.grey.shade400;
-  static Color shadowColor = Colors.yellowAccent;
+  static Color shadowColor = Colors.blueAccent;
 
 //  static Radius  radiusCircular = Radius.circular(20);
 //  static BorderRadius  borderRadiusCircular = BorderRadius.circular(20);
@@ -88,6 +88,7 @@ class AppThemes {
       disabledColor: dissabledColor,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          shadowColor: shadowColor,
           // padding: const EdgeInsets.all(8.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(

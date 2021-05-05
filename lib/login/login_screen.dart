@@ -159,7 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  shadowColor: Colors.yellow,
+
+                  primary: AppThemes.primaryDarkColor,
                   elevation: 15,
                   shape: RoundedRectangleBorder(
                     side: BorderSide(width: 1),
@@ -339,16 +340,18 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppThemes.primaryColor,
       body: SafeArea(
+
         child: Container(
-          // color: Colors.indigo ,
-          decoration: BoxDecoration(
+           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(dimencaoTela.width),
 
               // bottomRight: Radius.circular(10.0),
             ),
             color: Colors.white,
+
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
