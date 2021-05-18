@@ -2,23 +2,24 @@ import 'dart:async';
 import 'package:email_validator/email_validator.dart';
 
 class LoginValidator {
-  final validateEmail = StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
+  final validateEmail =
+      StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
     final bool isValid = EmailValidator.validate(email);
+
     if (isValid) {
-      return null;
+      return "Email inválido1";
     } else {
-      return "Email inválido";
+      return "Email inválido2";
     }
   });
 
-  final validatePassword = StreamTransformer<String, String>.fromHandlers(handleData: (password, sink) {
-    if (!password.trim().isEmpty || password != null) {
-      return null;
+  final validatePassword = StreamTransformer<String, String>.fromHandlers(
+      handleData: (password, sink) {
+    if (password.trim().isNotEmpty ) {
+      return "senha invalida1";
     } else {
-      return "Senha inválida";
-      ;
+      return "Senha inválida2";
+
     }
   });
-
-
 }

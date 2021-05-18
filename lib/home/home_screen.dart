@@ -1,4 +1,5 @@
-import 'package:ctrl_geral/login/login_bloc.dart';
+
+import 'package:ctrl_geral/routes/screen_routes.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   _HomeScreenState(String nomeEmpresa);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Container(
         child: Center(
-          child: Text("Entrei"),
+          child: TextButton(onPressed: (){
+            // _loginBloc.signout();
+            Navigator.pushNamed(context, Routes.loginScreen);
+          }, child: Text("voltar a tela de signin")),
         ),
       ),
       drawer: Drawer(child: ListView(
@@ -44,8 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             title: Text('Item 1'),
             onTap: () {
-              final _loginBloc = LoginBloc();
-              _loginBloc.signout();
+              // final _loginBloc = LoginBloc();
+              // _loginBloc.signout();
             },
           ),
         ],
