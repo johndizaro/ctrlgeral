@@ -1,5 +1,6 @@
 import 'package:ctrl_geral/logging/logger_style.dart';
 import 'package:ctrl_geral/login/authentication/auth_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 
@@ -15,6 +16,13 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
   Logger logger = Logger(
     printer: LoggerStyle('SigninBloc'),
   );
+
+  @override
+  void onTransition(Transition<SigninEvent, SigninState> transition) {
+    logger.i("transition.event - ${transition.event}");
+    logger.i("transition.currentState - ${transition.currentState}");
+    logger.i("transition.nextState - ${transition.nextState}");
+  }
 
   @override
   Stream<SigninState> mapEventToState(SigninEvent event) async* {

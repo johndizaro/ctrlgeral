@@ -26,6 +26,7 @@ class _SigninCardState extends State<SigninCard> {
     printer: LoggerStyle('SigninCard'),
   );
 
+
   Widget _fieldEmail() {
     return BlocBuilder<SigninBloc, SigninState>(
       builder: (context, state) {
