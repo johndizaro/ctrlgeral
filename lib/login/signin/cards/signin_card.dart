@@ -101,6 +101,9 @@ class _SigninCardState extends State<SigninCard> {
       padding:
       const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
       child: BlocBuilder<SigninBloc, SigninState>(
+        // buildWhen: (previusState, state){
+        //
+        // },
         builder: (context, state) {
           return state.formStatus is FormSubmitting ? CircularProgressIndicator()
           : ElevatedButton.icon(
