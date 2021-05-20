@@ -7,7 +7,7 @@ class SigninState {
 
   final String password;
 
-  bool get isValidPassword => password.length > 6;
+  bool get isValidPassword => password.length > 3;
 
   final FormSubmissionStatus formStatus;
 

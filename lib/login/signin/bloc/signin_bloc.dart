@@ -1,6 +1,5 @@
 import 'package:ctrl_geral/logging/logger_style.dart';
 import 'package:ctrl_geral/login/authentication/auth_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 

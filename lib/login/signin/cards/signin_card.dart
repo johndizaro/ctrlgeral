@@ -5,6 +5,7 @@ import 'package:ctrl_geral/login/authentication/auth_repository.dart';
 import 'package:ctrl_geral/login/signin/bloc/signin_bloc.dart';
 import 'package:ctrl_geral/login/signin/bloc/signin_state.dart';
 import 'package:ctrl_geral/login/signin/bloc/signin_event.dart';
+import 'package:ctrl_geral/login/signin/form_submission_status.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,18 +27,18 @@ class _SigninCardState extends State<SigninCard> {
     printer: LoggerStyle('SigninCard'),
   );
 
-
   Widget _fieldEmail() {
-    return BlocBuilder<SigninBloc, SigninState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextFormField(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BlocBuilder<SigninBloc, SigninState>(
+        builder: (context, state) {
+          return TextFormField(
             // onChanged: _loginBloc.changeEmail,
             keyboardType: TextInputType.emailAddress,
             validator: (value) =>
-                state.isValidUsername ? null : 'Senha inválida',
-            onChanged: (value) => context.read<SigninBloc>().add(
+                state.isValidUsername ? null : 'Email inválido',
+            onChanged: (value) =>
+                context.read<SigninBloc>().add(
                   SigninUsernameChanged(username: value),
                 ),
             // controller: emailController,
@@ -46,35 +47,39 @@ class _SigninCardState extends State<SigninCard> {
 
             decoration: InputDecoration(
 
-                // labelText: LoginFields().label(LoginFields.col00Email),
-                // hintText: LoginFields().hint(LoginFields.col00Email),
-                // errorText: snapshot.hasError ? snapshot.error : null,
-                ),
-          ),
-        );
-      },
+              // labelText: LoginFields().label(LoginFields.col00Email),
+              // hintText: LoginFields().hint(LoginFields.col00Email),
+              // errorText: snapshot.hasError ? snapshot.error : null,
+            ),
+          );
+        },
+      ),
     );
   }
 
   Widget _fieldPassword() {
-    return BlocBuilder<SigninBloc, SigninState>(
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextFormField(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BlocBuilder<SigninBloc, SigninState>(
+        builder: (context, state) {
+          return TextFormField(
             obscureText: obcurecerSenha,
             // onChanged: _loginBloc.changePassword,
             keyboardType: TextInputType.text,
             // controller: emailController,
-            validator: (value) =>
-                state.isValidPassword? null : 'Senha inválida',
-            onChanged: (value) => context.read<SigninBloc>().add(
-                  SigninPasswordChanged(password: value),
-                ),
+            validator: (value) {
+              return state.isValidPassword ? null : 'Senha inválida';
+            },
+
+            onChanged: (value) {
+              return context.read<SigninBloc>().add(
+                SigninPasswordChanged(password: value),
+              );
+            },
             decoration: InputDecoration(
-                // labelText: LoginFields().label(LoginFields.col00Senha),
-                // hintText: LoginFields().hint(LoginFields.col00Senha),
-                // errorText: snapshot.hasError ? snapshot.error : null,
+              // labelText: LoginFields().label(LoginFields.col00Senha),
+              // hintText: LoginFields().hint(LoginFields.col00Senha),
+              // errorText: snapshot.hasError ? snapshot.error : null,
                 suffixIcon: IconButton(
                     icon: Icon(obcurecerSenha
                         ? Icons.visibility
@@ -85,49 +90,59 @@ class _SigninCardState extends State<SigninCard> {
                         obcurecerSenha = !obcurecerSenha;
                       });
                     })),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
-  Widget _buttonLogin() {
+  Widget _buttonSignin() {
     return Padding(
       padding:
-          const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          primary: AppThemes.primaryDarkColor,
-          elevation: 15,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(width: 1),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+      const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
+      child: BlocBuilder<SigninBloc, SigninState>(
+        builder: (context, state) {
+          return state.formStatus is FormSubmitting ? CircularProgressIndicator()
+          : ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              primary: AppThemes.primaryDarkColor,
+              elevation: 15,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 1),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
             ),
-          ),
-        ),
-        onPressed: () async {
-          logger.i("Entrar no sistema");
-          // final snackBar = SnackBar(
-          //   content: Container(
-          //     child: Row(
-          //       children: [
-          //         Text("Aguarde um instante por favor..."),
-          //         CircularProgressIndicator()
-          //       ],
-          //     ),
-          //   ),
-          // );
-          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          // _loginBloc.signin(context);
+            onPressed: ()  {
+              if(_signinCardFormKey.currentState.validate()){
+                context.read<SigninBloc>().add(SigninSubmitted());
+              }
+              logger.i("Entrar no sistema");
 
-          logger.i("É presuposto que entrei no sistema");
 
-          // Navigator.pushNamed(context, Routes.homeScreen);
+              // final snackBar = SnackBar(
+              //   content: Container(
+              //     child: Row(
+              //       children: [
+              //         Text("Aguarde um instante por favor..."),
+              //         CircularProgressIndicator()
+              //       ],
+              //     ),
+              //   ),
+              // );
+              // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+              logger.i("É presuposto que entrei no sistema");
+
+              // Navigator.pushNamed(context, Routes.homeScreen);
+            },
+            icon: Icon(Icons.login),
+            label: Text("Entrar no sistema"),
+          );
         },
-        icon: Icon(Icons.login),
-        label: Text("Entrar no sistema"),
       ),
     );
   }
@@ -200,9 +215,11 @@ class _SigninCardState extends State<SigninCard> {
   Widget card_Signin() {
     return Card(
       margin: EdgeInsets.only(top: 8.0, right: 8.0, bottom: 0, left: 8.0),
-      child: BlocListener<SigninBloc, SigninState>(
-        listener: (context, state) {
-          // TODO: implement listener}
+      child: BlocProvider(
+        create: (context) {
+          return SigninBloc(
+            authRepository: RepositoryProvider.of<AuthRepository>(context),
+          );
         },
         child: Form(
           key: _signinCardFormKey,
@@ -212,7 +229,7 @@ class _SigninCardState extends State<SigninCard> {
               children: [
                 _fieldEmail(),
                 _fieldPassword(),
-                _buttonLogin(),
+                _buttonSignin(),
                 // _buttonSingup(),
                 // _buttonRecoverPassword(),
               ],
@@ -227,12 +244,7 @@ class _SigninCardState extends State<SigninCard> {
   Widget build(BuildContext context) {
     return Center(
       // key: UniqueKey(),
-      child: BlocProvider(
-        create: (context) => SigninBloc(
-          authRepository: context.read<AuthRepository>(),
-        ),
-        child: card_Signin(),
-      ),
+      child: card_Signin(),
     );
   }
 }
