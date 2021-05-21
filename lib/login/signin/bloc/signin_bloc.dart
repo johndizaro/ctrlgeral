@@ -38,7 +38,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
       yield state.copyWith(formStatus: FormSubmitting());
 
       try {
-        await authRepository.signin();
+        await authRepository.signin(password: state.password, email: state.username);
         yield state.copyWith(formStatus: SubmissionSuccess());
         logger.i("await authRepository.signin() - executado com sucesso");
       } catch (e) {

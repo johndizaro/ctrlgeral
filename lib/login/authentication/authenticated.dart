@@ -25,38 +25,38 @@
 //
 //
 //
-//   // Future<void> signin() async {
-//   //   bool logado = false;
-//   //   // final email = _emailController.value;
-//   //   // final password = _passwordController.value;
-//   //   // bool logado = false;
-//   //   // print("${StackTrace.current.toString()}");
-//   //   // logger.i("--->>>${StackTrace.current.toString()} - $email ");
-//   //
-//   //   await _firebaseAuth.authStateChanges().listen((User user) {
-//   //     if (user == null) {
-//   //       logger.i("usuario não logado");
-//   //     } else {
-//   //       logger.i("usuario está logado ${user}");
-//   //        // Navigator.pushNamed(context, Routes.homeScreen);
-//   //     }
-//   //   });
-//   //
-//   //   if (logado == false) {
-//   //     await FirebaseAuth.instance
-//   //         .signInWithEmailAndPassword(email: email, password: password)
-//   //         .then(
-//   //           (userCredential) {
-//   //         Navigator.pushNamed(context, Routes.homeScreen);
-//   //       },
-//   //     ).catchError((onError) {
-//   //       logger.i('${onError}');
-//   //
-//   //     });
-//   //   }
-//   //
-//   //
-//   // }
+//   Future<void> signin() async {
+//     bool logado = false;
+//     // final email = _emailController.value;
+//     // final password = _passwordController.value;
+//     // bool logado = false;
+//     // print("${StackTrace.current.toString()}");
+//     // logger.i("--->>>${StackTrace.current.toString()} - $email ");
+//
+//     await _firebaseAuth.authStateChanges().listen((User user) {
+//       if (user == null) {
+//         logger.i("usuario não logado");
+//       } else {
+//         logger.i("usuario está logado ${user}");
+//          // Navigator.pushNamed(context, Routes.homeScreen);
+//       }
+//     });
+//
+//     if (logado == false) {
+//       await FirebaseAuth.instance
+//           .signInWithEmailAndPassword(email: email, password: password)
+//           .then(
+//             (userCredential) {
+//           Navigator.pushNamed(context, Routes.homeScreen);
+//         },
+//       ).catchError((onError) {
+//         logger.i('${onError}');
+//
+//       });
+//     }
+//
+//
+//   }
 //
 //
 //
