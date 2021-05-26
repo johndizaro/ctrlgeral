@@ -1,6 +1,8 @@
 
+import 'package:ctrl_geral/logging/logger_style.dart';
 import 'package:ctrl_geral/routes/screen_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 class HomeScreen extends StatefulWidget {
   final String title;
@@ -14,9 +16,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   _HomeScreenState(String nomeEmpresa);
 
+  Logger logger = Logger(
+    printer: LoggerStyle('HomeScreen'),
+  );
+
+
 
   @override
   Widget build(BuildContext context) {
+    logger.i("iniciou");
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

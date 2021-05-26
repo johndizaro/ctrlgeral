@@ -1,5 +1,7 @@
 import 'package:ctrl_geral/logging/logger_style.dart';
 import 'package:ctrl_geral/login/authentication/auth_repository.dart';
+import 'package:ctrl_geral/routes/screen_routes.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 
@@ -18,9 +20,9 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
 
   @override
   void onTransition(Transition<SigninEvent, SigninState> transition) {
-    logger.i("transition.event - ${transition.event}");
-    logger.i("transition.currentState - ${transition.currentState}");
-    logger.i("transition.nextState - ${transition.nextState}");
+    logger.i("->1transition.event - ${transition.event}");
+    logger.i("2transition.currentState - ${transition.currentState}");
+    logger.i("3transition.nextState - ${transition.nextState}");
   }
 
   @override
@@ -38,12 +40,14 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
       yield state.copyWith(formStatus: FormSubmitting());
 
       try {
-        await authRepository.signin(password: state.password, email: state.username);
+
+        await authRepository.signin(
+            password: state.password, email: state.username);
         yield state.copyWith(formStatus: SubmissionSuccess());
-        logger.i("await authRepository.signin() - executado com sucesso");
+        logger.i("SubmissionSuccess - executado com sucesso");
       } catch (e) {
         yield state.copyWith(formStatus: SubmissionFailed(e));
-        logger.i("tivemos problemas para entrar");
+        logger.i("SubmissionFailed $e");
       }
     }
   }

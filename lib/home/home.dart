@@ -22,13 +22,24 @@ class _HomeState extends State<Home> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppThemes().myAppTheme,
-      home: RepositoryProvider(
-        create: (context) => AuthRepository(),
-        child: LoginScreen(),
-      ),
-      // onGenerateRoute: RouteGenerator.generateRoute,
-      // initialRoute: Routes.loginScreen,
+
+      onGenerateRoute: RouteGenerator.generateRoute,
+      initialRoute: Routes.loginScreen,
 
     );
   }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     debugShowCheckedModeBanner: false,
+  //     theme: AppThemes().myAppTheme,
+  //     home: RepositoryProvider(
+  //       create: (context) => AuthRepository(),
+  //       // child: LoginScreen(),
+  //     ),
+  //     onGenerateRoute: RouteGenerator.generateRoute,
+  //     initialRoute: Routes.loginScreen,
+  //
+  //   );
+  // }
 }

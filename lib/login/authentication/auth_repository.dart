@@ -1,10 +1,25 @@
+import 'dart:async';
 import 'package:ctrl_geral/logging/logger_style.dart';
-// import 'package:ctrl_geral/routes/screen_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
+enum AuthRepositoryStatus { unknown, authenticated, unauthenticated }
+
 class AuthRepository {
+  final _controller = StreamController<AuthRepositoryStatus>();
+  User user;
+
+  Stream<AuthRepositoryStatus> get outState => _controller.stream;
+  // Stream<LoginState> get outState => _stateController.stream;
+
+
+  Stream<AuthRepositoryStatus> get status async* {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    yield AuthRepositoryStatus.unauthenticated;
+    yield* _controller.stream;
+  }
+
   Logger logger = Logger(
     printer: LoggerStyle('AuthRepository'),
   );
@@ -17,20 +32,39 @@ class AuthRepository {
   // }
 
   Future<void> signin(
-      {@required String email , @required String password}) async {
+      {@required String email, @required String password}) async {
+    logger.i("signin status.last ${_controller.stream}");
     logger.i("signin email $email  password, $password");
 
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then(
-      (userCredential) {
-        var user = userCredential.user;
+          (userCredential) async {
+        user = userCredential.user;
+        _controller.add(AuthRepositoryStatus.authenticated);
 
-        logger.i("entrar no sistema ${userCredential.user}");
-        // Navigator.pushNamed(context, Routes.homeScreen);
+        logger.i(
+            "entrar no sistema userCredential.user ${userCredential.user}");
       },
     ).catchError((onError) {
-      logger.i('${onError}');
+      logger.i('não entrou no sistema${onError}');
+      _controller.add(AuthRepositoryStatus.unauthenticated);
     });
+  }
+
+  // Stream<AuthRepositoryStatus>  getStreamValue() async* {
+  //
+  // _controller.stream.listen((event) {
+  //   logger.i('event ${event}');
+  //
+  // });
+  // }
+
+  void logOut() {
+    _controller.add(AuthRepositoryStatus.unauthenticated);
+  }
+
+  void dispose() {
+    _controller.close();
   }
 }

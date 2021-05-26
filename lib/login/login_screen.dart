@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:ctrl_geral/app_theme/app_themes.dart';
 import 'package:ctrl_geral/logging/logger_style.dart';
+import 'package:ctrl_geral/login/authentication/auth_repository.dart';
 
 import 'package:ctrl_geral/login/signin/cards/signin_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:logger/logger.dart';
 
@@ -42,66 +44,69 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppThemes.primaryColor,
-      body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(dimencaoTela.width),
+    return RepositoryProvider(
+      create: (context) => AuthRepository(),
+      child: Scaffold(
+        backgroundColor: AppThemes.primaryColor,
+        body: SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(dimencaoTela.width),
 
-              // bottomRight: Radius.circular(10.0),
-            ),
-            color: Colors.white,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Ctrl Geral",
-                style: TextStyle(
-                    fontFamily: 'FasterOne',
-                    fontSize: 40,
-                    color: Colors.indigo,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: Offset(5.0, 5.0),
-                        blurRadius: 5.0,
-                        color: Colors.black26,
-                      ),
-                    ]),
+                // bottomRight: Radius.circular(10.0),
               ),
-              SigninCard(),
-              // AnimatedSwitcher(
-              //   duration: Duration(milliseconds: 800),
-              //   // switchInCurve: Curves.bounceIn,
-              //   // switchOutCurve: Curves.bounceInOut,
-              //   transitionBuilder: (widget, animation) => ScaleTransition(
-              //     scale: animation,
-              //     child: widget,
-              //   ),
-              //
-              //   child: _signinCard(),
-              //
-              //   // Container(
-              //   //   child: Padding(
-              //   //     padding: const EdgeInsets.all(8.0),
-              //   //     child: Align(
-              //   //       alignment: Alignment.topCenter,
-              //   //       child: FloatingActionButton(
-              //   //         onPressed: () {
-              //   //           Navigator.pushNamed(
-              //   //               context, RouteGenerator.homeScreenRoute);
-              //   //         },
-              //   //         child: Icon(Icons.login),
-              //   //       ),
-              //   //     ),
-              //   //   ),
-              //   // ),
-              // ),
-            ],
+              color: Colors.white,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Ctrl Geral",
+                  style: TextStyle(
+                      fontFamily: 'FasterOne',
+                      fontSize: 40,
+                      color: Colors.indigo,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(5.0, 5.0),
+                          blurRadius: 5.0,
+                          color: Colors.black26,
+                        ),
+                      ]),
+                ),
+                SigninCard(),
+                // AnimatedSwitcher(
+                //   duration: Duration(milliseconds: 800),
+                //   // switchInCurve: Curves.bounceIn,
+                //   // switchOutCurve: Curves.bounceInOut,
+                //   transitionBuilder: (widget, animation) => ScaleTransition(
+                //     scale: animation,
+                //     child: widget,
+                //   ),
+                //
+                //   child: _signinCard(),
+                //
+                //   // Container(
+                //   //   child: Padding(
+                //   //     padding: const EdgeInsets.all(8.0),
+                //   //     child: Align(
+                //   //       alignment: Alignment.topCenter,
+                //   //       child: FloatingActionButton(
+                //   //         onPressed: () {
+                //   //           Navigator.pushNamed(
+                //   //               context, RouteGenerator.homeScreenRoute);
+                //   //         },
+                //   //         child: Icon(Icons.login),
+                //   //       ),
+                //   //     ),
+                //   //   ),
+                //   // ),
+                // ),
+              ],
+            ),
           ),
         ),
       ),
