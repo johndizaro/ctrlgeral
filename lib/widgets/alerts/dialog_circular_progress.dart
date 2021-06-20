@@ -1,10 +1,9 @@
-import 'package:ctrl_geral/app_theme/app_themes.dart';
+// import 'package:ctrl_geral/app_theme/app_themes.dart';
 import 'package:flutter/material.dart';
 
-
-Future<void> dialogoCircularProgress(BuildContext context, String mensagem) async {
-
-  return   showDialog(
+Future<void> dialogoCircularProgress(
+    BuildContext context, String mensagem) async {
+  return showDialog(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
@@ -22,5 +21,4 @@ Future<void> dialogoCircularProgress(BuildContext context, String mensagem) asyn
       );
     },
   );
-
 }

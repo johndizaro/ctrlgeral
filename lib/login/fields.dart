@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class LoginFields {
   static const String _label = "label";
   static const String _size = "size";

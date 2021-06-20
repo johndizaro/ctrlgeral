@@ -1,17 +1,16 @@
-import 'dart:collection';
-import 'dart:io';
+// import 'dart:collection';
+// import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:logger/logger.dart';
 // import 'package:logging/logging.dart';
 import 'home/home.dart';
 
-var outputFile = new File('sample.log');
+// var outputFile = new File('sample.log');
 
 Future<void> main() async {
-
   // Logger.level = Level.info;
   // Queue<LogRecord> logs = Queue();
   //
@@ -31,7 +30,3 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(Home());
 }
-
-
-
-

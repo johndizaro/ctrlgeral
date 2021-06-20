@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: TextButton(onPressed: (){
             // _loginBloc.signout();
-            Navigator.pushNamed(context, Routes.loginScreen);
+            Navigator.pushNamed(context, Routes.routeLoginScreen);
           }, child: Text("voltar a tela de signin")),
         ),
       ),

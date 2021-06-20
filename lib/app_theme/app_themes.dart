@@ -26,12 +26,12 @@ class AppThemes {
 //  static Radius  radiusCircular = Radius.circular(20);
 //  static BorderRadius  borderRadiusCircular = BorderRadius.circular(20);
 
-  static Decoration _boxDecoration = BoxDecoration(
-    borderRadius: BorderRadius.all(
-      Radius.circular(20),
-    ),
-//    color: Colors.blue.shade200,
-  );
+//   static Decoration _boxDecoration = BoxDecoration(
+//     borderRadius: BorderRadius.all(
+//       Radius.circular(20),
+//     ),
+// //    color: Colors.blue.shade200,
+//   );
 
   static OutlineInputBorder _outlineInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20),
@@ -41,13 +41,13 @@ class AppThemes {
     ),
   );
 
-  static OutlineInputBorder _enabledBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    borderSide: BorderSide(
-      width: 2,
-      color: primarySwatch,
-    ),
-  );
+  // static OutlineInputBorder _enabledBorder = OutlineInputBorder(
+  //   borderRadius: BorderRadius.circular(20),
+  //   borderSide: BorderSide(
+  //     width: 2,
+  //     color: primarySwatch,
+  //   ),
+  // );
 
   static OutlineInputBorder _errorBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20),

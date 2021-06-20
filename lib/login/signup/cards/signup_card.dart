@@ -1,5 +1,5 @@
-import 'package:ctrl_geral/app_theme/app_themes.dart';
-import 'package:ctrl_geral/widgets/alerts/dialog_informativo.dart';
+// import 'package:ctrl_geral/app_theme/app_themes.dart';
+// import 'package:ctrl_geral/widgets/alerts/dialog_informativo.dart';
 import 'package:flutter/material.dart';
 
 class SignupCard extends StatefulWidget {
@@ -12,7 +12,6 @@ class SignupCard extends StatefulWidget {
 class _SignupCardState extends State<SignupCard> {
   bool obcurecerSenha = true;
 
-  @override
   Widget _fieldName() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -49,7 +48,7 @@ class _SignupCardState extends State<SignupCard> {
                 icon: Icon(
                     obcurecerSenha ? Icons.visibility : Icons.visibility_off),
                 onPressed: () {
-                  print("obscurecerSenha ${obcurecerSenha}");
+                  print("obscurecerSenha $obcurecerSenha");
                   setState(() {
                     obcurecerSenha = !obcurecerSenha;
                   });
@@ -72,7 +71,7 @@ class _SignupCardState extends State<SignupCard> {
                 icon: Icon(
                     obcurecerSenha ? Icons.visibility : Icons.visibility_off),
                 onPressed: () {
-                  print("obscurecerSenha ${obcurecerSenha}");
+                  print("obscurecerSenha $obcurecerSenha");
                   setState(() {
                     obcurecerSenha = !obcurecerSenha;
                   });
@@ -108,30 +107,30 @@ class _SignupCardState extends State<SignupCard> {
     );
   }
 
-  Widget _buttonSave() {
-    return Padding(
-      padding:
-          const EdgeInsets.only(left: 8.0, top: 0.0, right: 8.0, bottom: 0.0),
-      child: ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(
-          primary: AppThemes.primaryLightColor,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(width: 1),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-          ),
-        ),
-        onPressed: () {
-          dialogoInformativo(context,
-              "Desculpe o transtorno, esta rotina encontra-se em desenvolvimento.");
-        },
-        icon: Icon(Icons.save_alt),
-        label: Text("Guardar informações"),
-      ),
-    );
-  }
+  // Widget _buttonSave() {
+  //   return Padding(
+  //     padding:
+  //         const EdgeInsets.only(left: 8.0, top: 0.0, right: 8.0, bottom: 0.0),
+  //     child: ElevatedButton.icon(
+  //       style: ElevatedButton.styleFrom(
+  //         primary: AppThemes.primaryLightColor,
+  //         shape: RoundedRectangleBorder(
+  //           side: BorderSide(width: 1),
+  //           borderRadius: BorderRadius.only(
+  //             bottomLeft: Radius.circular(20),
+  //             bottomRight: Radius.circular(20),
+  //           ),
+  //         ),
+  //       ),
+  //       onPressed: () {
+  //         dialogoInformativo(context,
+  //             "Desculpe o transtorno, esta rotina encontra-se em desenvolvimento.");
+  //       },
+  //       icon: Icon(Icons.save_alt),
+  //       label: Text("Guardar informações"),
+  //     ),
+  //   );
+  // }
 
   Widget build(BuildContext context) {
     return Center(

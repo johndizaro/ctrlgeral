@@ -1,7 +1,6 @@
 import 'package:ctrl_geral/app_theme/app_themes.dart';
-import 'package:ctrl_geral/home/home_screen.dart';
+// import 'package:ctrl_geral/home/home_screen.dart';
 import 'package:ctrl_geral/logging/logger_style.dart';
-import 'package:ctrl_geral/login/authentication/auth_repository.dart';
 import 'package:ctrl_geral/login/authentication/auth_repository.dart';
 
 import 'package:ctrl_geral/login/signin/bloc/signin_bloc.dart';
@@ -21,11 +20,12 @@ class SigninCard extends StatefulWidget {
   _SigninCardState createState() => _SigninCardState();
 }
 
-class _SigninCardState extends State<SigninCard> {
+class _SigninCardState extends State<SigninCard> with AuthRepository {
   bool obcurecerSenha = true;
 
   final _signinCardFormKey = GlobalKey<FormState>();
-  AuthRepository authRepository = AuthRepository();
+  // AuthRepository authRepository = AuthRepository();
+  // FormSubmitting formSubmitting = FormSubmitting();
 
   Logger logger = Logger(
     printer: LoggerStyle('SigninCard'),
@@ -98,13 +98,20 @@ class _SigninCardState extends State<SigninCard> {
       ),
     );
   }
-
+  @override
+  void dispose() {
+    super.dispose();
+    AuthRepository().dispose();
+   
+    // _loginBloc.dispose();
+  }
   Widget _buttonSignin() {
     return Padding(
       padding:
           const EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0, bottom: 0.0),
       child: BlocBuilder<SigninBloc, SigninState>(
-        // buildWhen: (previous, current) => previous.formStatus != current.formStatus,
+        buildWhen: (previous, current) =>
+            previous.formStatus != current.formStatus,
         builder: (context, state) {
           return state.formStatus is FormSubmitting
               ? CircularProgressIndicator()
@@ -120,11 +127,22 @@ class _SigninCardState extends State<SigninCard> {
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    if (_signinCardFormKey.currentState.validate()) {
-                      context.read<SigninBloc>().add(SigninSubmitted());
-                    }
+                  onPressed: () async {
+                    logger.i("state.formStatus ${state.formStatus}");
+                    logger.i(
+                        "_authRepository.status ${AuthRepositoryStatus.authenticated}");
+                    // if (_signinCardFormKey.currentState.validate()) {
+                    //   context.read<SigninBloc>().add(SigninSubmitted());
+                    //
+                    // }
+                    // Navigator.pop(context);
+                    // Navigator.popUntil(context, ModalRoute.withName(Routes.routeHome));
+                    // await authRepository.signin(email: 'johndizaro@gmail.com', password: 'aaaaaaaa');
+                    await signin(
+                        email: "johndizaro@gmail.com", password: "aaaaaaaa");
 
+                    Navigator.popAndPushNamed(context, Routes.routeHome);
+                    // ModalRoute.withName(Routes.routeHome);
 
                     // authRepository.outState.listen((state) {
                     //   switch (state){
@@ -142,12 +160,6 @@ class _SigninCardState extends State<SigninCard> {
                     //       break;
                     //   }
                     // });
-
-
-                    logger
-                        .i("onPressed 1 state.formStatus ${state.formStatus}");
-                    logger.i(
-                        "onPressed 2 _authRepository.status ${AuthRepositoryStatus.authenticated}");
 
                     // logger.i("onPressed AuthRepository().getStreamValue() ${AuthRepository().getStreamValue()}");
 
@@ -260,12 +272,12 @@ class _SigninCardState extends State<SigninCard> {
   //   );
   // }
 
-  void _showSnackBar(BuildContext context, String message) {
-    final snackBar = SnackBar(content: Text(message));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
+  // void _showSnackBar(BuildContext context, String message) {
+  //   final snackBar = SnackBar(content: Text(message));
+  //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  // }
 
-  Widget card_Signin() {
+  Widget cardSignin() {
     return Card(
       margin: EdgeInsets.only(top: 8.0, right: 8.0, bottom: 0, left: 8.0),
       child: BlocProvider(
@@ -297,7 +309,7 @@ class _SigninCardState extends State<SigninCard> {
   Widget build(BuildContext context) {
     return Center(
       // key: UniqueKey(),
-      child: card_Signin(),
+      child: cardSignin(),
     );
   }
 }

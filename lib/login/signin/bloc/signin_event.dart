@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 abstract class SigninEvent {}
 
 class SigninUsernameChanged extends SigninEvent {
@@ -14,5 +12,4 @@ class SigninPasswordChanged extends SigninEvent {
   SigninPasswordChanged({this.password});
 }
 
-class SigninSubmitted extends SigninEvent {
-}
+class SigninSubmitted extends SigninEvent {}
