@@ -1,32 +1,14 @@
-// import 'dart:collection';
-// import 'dart:io';
-
+import 'package:authentication_repository/authentication_repository.dart';
+import 'package:ctrl_geral/app.dart';
+import 'package:flutter/widgets.dart';
+import 'package:user_repository/user_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:logger/logger.dart';
-// import 'package:logging/logging.dart';
-import 'home/home.dart';
 
-// var outputFile = new File('sample.log');
-
-Future<void> main() async {
-  // Logger.level = Level.info;
-  // Queue<LogRecord> logs = Queue();
-  //
-  // Logger.root.level = Level.ALL; // defaults to Level.INFO
-  // Logger.root.onRecord.listen((LogRecord record) {
-  //
-  //   outputFile.writeAsStringSync("${record.time} | ${record.level} | ${record.message} | ${record.loggerName}\n", mode: FileMode.append);
-  //
-  //   // print('${record.loggerName}: ${record.time}: ${record.level.name}:  ${record.message}');
-  //   // logs.addLast(record);
-  //   // while(logs.length  > 10) {
-  //   //   logs.removeFirst();
-  //   // }
-  // });
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(Home());
+  runApp(App(
+    authenticationRepository: AuthenticationRepository(),
+    userRepository: UserRepository(),
+  ));
 }
